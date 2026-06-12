@@ -1,0 +1,13 @@
+frontend/node_modules
+frontend/dist
+frontend/.env
+frontend/.env.*
+backend/__pycache__
+backend/.env
+backend/.env.*
+**/__pycache__
+**/*.pyc
+.git
+docker-compose.yml
+firebase.json
+README.md

@@ -1,0 +1,48 @@
+steps:
+  # ── Step 1: Build the Docker image ───────────────────────────────────────────
+  - name: 'gcr.io/cloud-builders/docker'
+    id: build
+    args:
+      - build
+      - -t
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:$COMMIT_SHA
+      - -t
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:latest
+      - ./backend
+
+  # ── Step 2: Push to Artifact Registry ────────────────────────────────────────
+  - name: 'gcr.io/cloud-builders/docker'
+    id: push
+    waitFor: [build]
+    args:
+      - push
+      - --all-tags
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend
+
+  # ── Step 3: Deploy to Cloud Run ──────────────────────────────────────────────
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: deploy
+    waitFor: [push]
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - bfai-hardik-backend
+      - --image=asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:$COMMIT_SHA
+      - --region=asia-south1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --port=8080
+      - --memory=2Gi
+      - --cpu=2
+      - --min-instances=0
+      - --max-instances=3
+      - --timeout=300
+      - --set-secrets=GROQ_API_KEY=BFAI_GROQ_API_KEY:latest,OPENAI_API_KEY=BFAI_OPENAI_API_KEY:latest,ELEVENLABS_API_KEY=BFAI_ELEVENLABS_API_KEY:latest
+      - --set-env-vars=APP_ENV=production
+
+images:
+  - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend
+
+options:
+  logging: CLOUD_LOGGING_ONLY
