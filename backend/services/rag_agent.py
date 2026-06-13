@@ -83,8 +83,30 @@ def run_rag_agent(message: str, conversation_history: list) -> dict:
         elif msg.get("role") == "assistant":
             lc_history.append(AIMessage(content=msg["content"]))
 
-    result = executor.invoke({"input": message, "chat_history": lc_history})
-    answer = result["output"]
+    try:
+        result = executor.invoke({"input": message, "chat_history": lc_history})
+        answer = result["output"]
+    except Exception as e:
+        err = str(e)
+        if "429" in err or "rate_limit" in err.lower() or "Rate limit" in err:
+            answer = (
+                "DocVault AI is temporarily unavailable because the AI provider's daily token limit has been reached. "
+                "This resets at midnight UTC. Please try again later, or ask a simpler question in the meantime."
+            )
+        else:
+            print(f"[RAG AGENT ERROR] {e}")
+            answer = (
+                "Sorry, I encountered an error while processing your request. "
+                "Please try again in a moment."
+            )
+        return {
+            "answer": answer,
+            "citations": [],
+            "conversation_history": conversation_history + [
+                {"role": "user", "content": message},
+                {"role": "assistant", "content": answer},
+            ],
+        }
 
     # Parse citations from the answer text: look for [filename, p.N] patterns
     citation_pattern = r'\[([^\]]+),\s*p\.(\d+)\]'

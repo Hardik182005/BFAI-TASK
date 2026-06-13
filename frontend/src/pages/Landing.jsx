@@ -110,9 +110,9 @@ export default function Landing() {
             <span className="text-xl font-bold text-[#0d0d0d] tracking-tight font-title-md">DocVault AI</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a className="text-[#5317dd] font-bold border-b-2 border-[#5317dd] pb-1 font-label-caps text-[11px] tracking-widest" href="#">Home</a>
-            <a className="text-[#484456] hover:text-[#5317dd] transition-colors font-label-caps text-[11px] tracking-widest" href="#features">Features</a>
-            <a className="text-[#484456] hover:text-[#5317dd] transition-colors font-label-caps text-[11px] tracking-widest" href="#how-it-works">How it works</a>
+            <button onClick={() => window.scrollTo({top:0,behavior:"smooth"})} className="text-[#5317dd] font-bold border-b-2 border-[#5317dd] pb-1 font-label-caps text-[11px] tracking-widest">Home</button>
+            <button onClick={() => document.getElementById("features")?.scrollIntoView({behavior:"smooth"})} className="text-[#484456] hover:text-[#5317dd] transition-colors font-label-caps text-[11px] tracking-widest">Features</button>
+            <button onClick={() => document.getElementById("how-it-works")?.scrollIntoView({behavior:"smooth"})} className="text-[#484456] hover:text-[#5317dd] transition-colors font-label-caps text-[11px] tracking-widest">How it works</button>
           </div>
           <div className="flex items-center gap-4">
             <button onClick={() => navigate("/chat")}

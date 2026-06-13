@@ -9,7 +9,7 @@ class ErrorBoundary extends Component {
       <div className="flex flex-col items-center justify-center min-h-screen gap-4 text-center px-6">
         <span className="material-symbols-outlined text-5xl text-[#5317dd]">refresh</span>
         <p className="text-[18px] font-bold text-[#0d0d0d]">Something went wrong on this page.</p>
-        <button onClick={() => { this.setState({ crashed: false }); window.location.hash = "#/chat"; }}
+        <button onClick={() => { this.setState({ crashed: false }); window.location.href = "/chat"; }}
           className="px-6 py-2.5 bg-[#5317dd] text-white rounded-xl font-bold text-[14px] hover:bg-[#4311b8]">
           Back to Chat
         </button>
@@ -19,7 +19,7 @@ class ErrorBoundary extends Component {
   }
 }
 
-import { HashRouter as Router, Routes, Route, Outlet, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet, Navigate, useNavigate, Link } from "react-router-dom";
 import SideNavBar from "./components/SideNavBar";
 import TopNavBar from "./components/TopNavBar";
 import VoiceOrb from "./components/VoiceOrb";
@@ -31,10 +31,10 @@ import Settings from "./pages/Settings";
 
 function MobileDrawer({ open, onClose }) {
   const NAV = [
-    { href: "#/chat",      icon: "chat",         label: "Ask BFAI"       },
-    { href: "#/upload",    icon: "upload_file",  label: "Upload Docs"    },
-    { href: "#/documents", icon: "folder_open",  label: "My Documents"   },
-    { href: "#/settings",  icon: "settings",     label: "Settings"       },
+    { to: "/chat",      icon: "chat",         label: "Ask DocVault AI" },
+    { to: "/upload",    icon: "upload_file",  label: "Upload Docs"     },
+    { to: "/documents", icon: "folder_open",  label: "My Documents"    },
+    { to: "/settings",  icon: "settings",     label: "Settings"        },
   ];
   if (!open) return null;
   return (
@@ -45,18 +45,18 @@ function MobileDrawer({ open, onClose }) {
             <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
               <span className="material-symbols-outlined text-white text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
             </div>
-            <span className="font-bold text-[14px] text-gray-900">BFAI</span>
+            <span className="font-bold text-[14px] text-gray-900">DocVault AI</span>
           </div>
           <button onClick={onClose}><span className="material-symbols-outlined text-gray-400">close</span></button>
         </div>
         <ul className="flex flex-col gap-0.5 p-3 flex-grow">
-          {NAV.map(({ href, icon, label }) => (
-            <li key={href}>
-              <a href={href} onClick={onClose}
+          {NAV.map(({ to, icon, label }) => (
+            <li key={to}>
+              <Link to={to} onClick={onClose}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-500 hover:text-primary hover:bg-purple-50 transition-all text-[13px] font-medium">
                 <span className="material-symbols-outlined text-[18px]">{icon}</span>
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

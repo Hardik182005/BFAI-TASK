@@ -166,7 +166,7 @@ export default function Documents() {
             <span className="material-symbols-outlined text-5xl opacity-30">folder_open</span>
             <p className="text-[15px] font-medium">No documents yet</p>
             <p className="text-[13px]">Upload some files to get started.</p>
-            <a href="#/upload" className="mt-2 px-5 py-2.5 bg-primary text-on-primary rounded-lg text-[13px] font-semibold hover:opacity-90">
+            <a href="/upload" className="mt-2 px-5 py-2.5 bg-primary text-on-primary rounded-lg text-[13px] font-semibold hover:opacity-90">
               Upload Documents
             </a>
           </div>

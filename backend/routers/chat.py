@@ -24,5 +24,18 @@ async def chat(request: Request, body: ChatRequest):
             "citations": [],
             "conversation_history": body.conversation_history,
         }
-    result = run_rag_agent(clean_message, body.conversation_history)
-    return result
+    try:
+        result = run_rag_agent(clean_message, body.conversation_history)
+        return result
+    except Exception as e:
+        err = str(e)
+        if "429" in err or "rate_limit" in err.lower():
+            msg = "DocVault AI is temporarily unavailable — AI token limit reached. Resets at midnight UTC."
+        else:
+            print(f"[CHAT ERROR] {e}")
+            msg = "DocVault AI encountered an error. Please try again in a moment."
+        return {
+            "answer": msg,
+            "citations": [],
+            "conversation_history": body.conversation_history,
+        }
