@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 
 const NAV_ITEMS = [
-  { to: "/chat",      icon: "chat",         label: "Ask BFAI"     },
+  { to: "/chat",      icon: "chat",         label: "Ask DocVault AI" },
   { to: "/upload",    icon: "upload_file",  label: "Upload Docs"  },
   { to: "/documents", icon: "folder_open",  label: "My Documents" },
   { to: "/settings",  icon: "settings",     label: "Settings"     },
@@ -35,7 +35,7 @@ export default function SideNavBar() {
           <span className="material-symbols-outlined text-white text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
         </div>
         <div>
-          <p className="text-[14px] font-bold text-gray-900 leading-tight">BFAI</p>
+          <p className="text-[14px] font-bold text-gray-900 leading-tight">DocVault AI</p>
           <p className="text-[11px] text-gray-400 leading-none">Document Intelligence</p>
         </div>
       </div>

@@ -80,7 +80,7 @@ export default function Landing() {
           {[0, 1].map(dup => (
             <div key={dup} className="flex items-center gap-8 px-4">
               {[
-                { label: "BFAI ENGINE", val: "ONLINE", up: true },
+                { label: "DOCVAULT AI", val: "ONLINE", up: true },
                 { label: "DOCS INDEXED", val: "5+", up: true },
                 { label: "OCR ACCURACY", val: "99.2%", up: true },
                 { label: "RAG LATENCY", val: "< 2s", up: true },
@@ -107,7 +107,7 @@ export default function Landing() {
             <div className="w-8 h-8 rounded-lg bg-[#6434ed] flex items-center justify-center">
               <span className="material-symbols-outlined text-white text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
             </div>
-            <span className="text-xl font-bold text-[#0d0d0d] tracking-tight font-title-md">BFAI</span>
+            <span className="text-xl font-bold text-[#0d0d0d] tracking-tight font-title-md">DocVault AI</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
             <a className="text-[#5317dd] font-bold border-b-2 border-[#5317dd] pb-1 font-label-caps text-[11px] tracking-widest" href="#">Home</a>
@@ -140,7 +140,7 @@ export default function Landing() {
                 ))}
               </div>
               <div className="flex flex-wrap gap-x-4 gap-y-2">
-                {"BFAI translates.".split(" ").map((word, i) => (
+                {"DocVault AI translates.".split(" ").map((word, i) => (
                   <span key={i} className="overflow-hidden inline-flex pb-2">
                     <span className="inline-block text-primary animate-mask-up" style={{ animationDelay: `${0.45 + i * 0.15}s`, transform: "translateY(120%) rotate(4deg)" }}>{word}</span>
                   </span>
@@ -155,7 +155,7 @@ export default function Landing() {
               <button onClick={() => navigate("/chat")}
                 className="bg-[#5317dd] text-white px-8 py-3.5 rounded-lg font-label-caps text-sm tracking-wider hover:opacity-90 transition-all shadow-md font-bold uppercase flex items-center gap-2">
                 <span className="material-symbols-outlined text-[18px]">chat</span>
-                Ask BFAI →
+                Ask DocVault AI →
               </button>
               <button onClick={() => navigate("/upload")}
                 className="border border-[#cac3d9] text-[#0d0d0d] px-8 py-3.5 rounded-lg font-label-caps text-sm tracking-wider hover:border-primary/50 hover:bg-surface-container-low transition-all font-bold uppercase flex items-center gap-2">
@@ -252,7 +252,7 @@ export default function Landing() {
       <section id="features" className="py-[90px] bg-[#fcf9f8] border-b border-[#cac3d9]/30">
         <div className="max-w-[1100px] mx-auto px-8">
           <div className="text-center mb-14">
-            <span className="text-[11px] font-bold text-[#5317dd] tracking-[0.2em] uppercase block mb-3">What BFAI Does</span>
+            <span className="text-[11px] font-bold text-[#5317dd] tracking-[0.2em] uppercase block mb-3">What DocVault AI Does</span>
             <h2 className="text-[36px] md:text-[44px] font-bold text-[#0d0d0d] tracking-tight leading-tight">
               Every document. One intelligence layer.
             </h2>
@@ -316,7 +316,7 @@ export default function Landing() {
       <section className="py-[90px] bg-[#5317dd]">
         <div className="max-w-[700px] mx-auto px-8 text-center">
           <h2 className="text-[36px] md:text-[48px] font-bold text-white leading-tight mb-4">
-            Documents speak.<br />Let BFAI translate.
+            Documents speak.<br />Let DocVault AI translate.
           </h2>
           <p className="text-white/70 text-[16px] mb-8">Upload your first document in seconds. No signup required for the demo.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -328,7 +328,7 @@ export default function Landing() {
             <button onClick={() => navigate("/chat")}
               className="border-2 border-white/40 text-white px-8 py-3.5 rounded-lg font-bold text-[14px] hover:border-white/70 transition-all flex items-center gap-2 justify-center">
               <span className="material-symbols-outlined">chat</span>
-              Ask BFAI
+              Ask DocVault AI
             </button>
           </div>
         </div>
@@ -336,8 +336,8 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="bg-[#0d0d0d] text-white/50 py-8 text-center font-data-mono text-[12px]">
-        <p>BFAI — Document Intelligence Platform · Built with Groq, ElevenLabs, ChromaDB, FastAPI, React</p>
-        <p className="mt-1 text-white/30">Documents speak. BFAI translates.</p>
+        <p>DocVault AI — Document Intelligence Platform · Built with Groq, ElevenLabs, ChromaDB, FastAPI, React</p>
+        <p className="mt-1 text-white/30">Documents speak. DocVault AI translates.</p>
       </footer>
     </div>
   );

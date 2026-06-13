@@ -5,8 +5,8 @@
   "targets": {
     "mediflow-nexus-2026": {
       "hosting": {
-        "bfai-hardik": [
-          "bfai-hardik"
+        "docvault-ai-app": [
+          "docvault-ai-app"
         ]
       }
     }

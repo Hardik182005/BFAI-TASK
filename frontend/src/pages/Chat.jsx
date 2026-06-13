@@ -21,7 +21,7 @@ export default function Chat() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hello! I'm BFAI. Ask me anything about your uploaded documents — I'll answer with exact citations showing the source page. If something isn't in the documents, I'll tell you that too.",
+      text: "Hello! I'm DocVault AI. Ask me anything about your uploaded documents — I'll answer with exact citations showing the source page. If something isn't in the documents, I'll tell you that too.",
       citations: [],
     }
   ]);
@@ -143,7 +143,7 @@ export default function Chat() {
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-primary text-3xl">chat</span>
           <div>
-            <h2 className="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Ask BFAI</h2>
+            <h2 className="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Ask DocVault AI</h2>
             <p className="font-body-md text-body-md text-on-surface-variant">Ask anything about your uploaded documents. Get grounded answers with citations.</p>
           </div>
         </div>
@@ -187,7 +187,7 @@ export default function Chat() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
-                <span className="font-label-caps text-label-caps text-on-surface-variant">BFAI — DOCUMENT INTELLIGENCE</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant">DocVault AI — DOCUMENT INTELLIGENCE</span>
               </div>
               <button
                 onClick={() => { setVoiceEnabled(v => !v); if (isSpeaking && audioRef.current) { audioRef.current.pause(); setIsSpeaking(false); } }}

@@ -7,7 +7,7 @@ const SpeechRecognition =
     ? (window.SpeechRecognition || window.webkitSpeechRecognition)
     : null;
 
-// Global floating BFAI chat + voice orb — rendered in Layout so it shows on every route.
+// Global floating DocVault AI chat + voice orb — rendered in Layout so it shows on every route.
 // Voice NEVER auto-starts — only fires when the user taps the mic button.
 export default function VoiceOrb() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function VoiceOrb() {
   const [listening, setListening] = useState(false);
   const [liveTranscript, setLiveTranscript] = useState(""); // shown while mic is on
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hello! I'm BFAI. Ask me anything about your uploaded documents — I'll answer with exact citations showing the source page." }
+    { role: "assistant", text: "Hello! I'm DocVault AI. Ask me anything about your uploaded documents — I'll answer with exact citations showing the source page." }
   ]);
   const messagesEndRef = useRef(null);
   const audioRef = useRef(null);
@@ -62,7 +62,7 @@ export default function VoiceOrb() {
         setSpeakingIdx(s => (s === idx ? null : s));
       };
       audio.onended = cleanup;
-      audio.onerror = () => { console.warn("[BFAI TTS] Audio error"); cleanup(); };
+      audio.onerror = () => { console.warn("[DocVault AI TTS] Audio error"); cleanup(); };
       await audio.play();
     } catch (e) {
       console.warn("[BFAI TTS] speak() error:", e);
@@ -171,7 +171,7 @@ export default function VoiceOrb() {
         setTimeout(() => speak(answer, answerIdx), 50);
       }
     } catch {
-      setMessages(prev => [...prev, { role: "assistant", text: "BFAI is unavailable right now. Please check the server is running.", citations: [] }]);
+      setMessages(prev => [...prev, { role: "assistant", text: "DocVault AI is unavailable right now. Please check the server is running.", citations: [] }]);
     } finally {
       setLoading(false);
     }
@@ -187,7 +187,7 @@ export default function VoiceOrb() {
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
               <div>
-                <p className="text-[13px] font-bold leading-tight">BFAI</p>
+                <p className="text-[13px] font-bold leading-tight">DocVault AI</p>
                 <p className="text-[10px] text-white/70 leading-none">
                   {listening ? (liveTranscript ? `"${liveTranscript}"` : "Listening…") : "Document Intelligence"}
                 </p>
@@ -288,7 +288,7 @@ export default function VoiceOrb() {
       {/* Floating orb button */}
       <button
         onClick={() => setOpen(v => !v)}
-        aria-label={open ? "Close BFAI assistant" : "Open BFAI assistant"}
+        aria-label={open ? "Close DocVault AI assistant" : "Open DocVault AI assistant"}
         className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-[#6434ed] text-white flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform"
       >
         <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>

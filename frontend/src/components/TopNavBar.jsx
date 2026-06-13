@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const BREADCRUMBS = {
-  "/chat":      ["BFAI", "Ask BFAI"],
-  "/upload":    ["BFAI", "Upload Documents"],
-  "/documents": ["BFAI", "My Documents"],
-  "/settings":  ["BFAI", "Settings"],
+  "/chat":      ["DocVault AI", "Ask DocVault AI"],
+  "/upload":    ["DocVault AI", "Upload Documents"],
+  "/documents": ["DocVault AI", "My Documents"],
+  "/settings":  ["DocVault AI", "Settings"],
 };
 
 function getBreadcrumb(pathname) {
-  return BREADCRUMBS[pathname] || ["BFAI"];
+  return BREADCRUMBS[pathname] || ["DocVault AI"];
 }
 
 export default function TopNavBar({ onToggleMobileMenu }) {
