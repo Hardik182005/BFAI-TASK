@@ -5,7 +5,7 @@ steps:
     args:
       - build
       - -t
-      - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:$COMMIT_SHA
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:$BUILD_ID
       - -t
       - asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:latest
       - -f
@@ -30,7 +30,7 @@ steps:
       - run
       - deploy
       - bfai-hardik-backend
-      - --image=asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:$COMMIT_SHA
+      - --image=asia-south1-docker.pkg.dev/$PROJECT_ID/bfai-hardik/backend:latest
       - --region=asia-south1
       - --platform=managed
       - --allow-unauthenticated
