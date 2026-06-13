@@ -124,10 +124,10 @@ export default function Upload() {
       </div>
 
       {/* Pre-loaded samples notice */}
-      <div className="mb-6 p-4 rounded-xl bg-primary-fixed/30 border border-primary/20">
-        <p className="text-[13px] text-on-primary-container">
-          <span className="font-semibold">5 sample documents are pre-loaded.</span> You can go to{" "}
-          <a href="#/chat" className="text-primary underline">Ask BFAI</a> and start chatting right away.
+      <div className="mb-6 p-4 rounded-xl bg-purple-50 border border-purple-200">
+        <p className="text-[13px] text-gray-800">
+          <span className="font-semibold text-purple-900">5 sample documents are pre-loaded.</span> You can go to{" "}
+          <a href="#/chat" className="text-purple-700 font-semibold underline hover:text-purple-900">Ask DocVault AI</a> and start chatting right away.
         </p>
       </div>
 

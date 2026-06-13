@@ -167,57 +167,57 @@ export default function Settings() {
           <div className="bg-surface-container-lowest rounded-lg border border-outline-variant/30 p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className={`w-2 h-2 rounded-full ${apiLoading ? "bg-yellow-500 animate-pulse" : apiStatus ? "bg-tertiary" : "bg-error"}`} />
-              <span className="font-label-caps text-[10px] text-on-surface-variant">BACKEND</span>
+              <span className="font-label-caps text-[10px] text-gray-500 font-bold tracking-widest">BACKEND</span>
             </div>
             <p className="font-data-mono text-sm text-on-surface font-bold">
               {apiLoading ? "Checking…" : apiStatus ? "Online" : "Offline"}
             </p>
-            <p className="text-[10px] text-on-surface-variant mt-1">FastAPI · Python</p>
+            <p className="text-[10px] text-gray-500 mt-1">FastAPI · Python</p>
           </div>
 
           {/* Docs Indexed */}
           <div className="bg-surface-container-lowest rounded-lg border border-outline-variant/30 p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-tertiary" />
-              <span className="font-label-caps text-[10px] text-on-surface-variant">INDEXED</span>
+              <span className="font-label-caps text-[10px] text-gray-500 font-bold tracking-widest">INDEXED</span>
             </div>
             <p className="font-data-mono text-sm text-on-surface font-bold">
               {apiStatus ? (apiStatus.documents_indexed ?? 0) : "—"}
             </p>
-            <p className="text-[10px] text-on-surface-variant mt-1">Documents in ChromaDB</p>
+            <p className="text-[10px] text-gray-500 mt-1">Documents in ChromaDB</p>
           </div>
 
           {/* AI Stack */}
           <div className="bg-surface-container-lowest rounded-lg border border-outline-variant/30 p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-secondary" />
-              <span className="font-label-caps text-[10px] text-on-surface-variant">AI ENGINE</span>
+              <span className="font-label-caps text-[10px] text-gray-500 font-bold tracking-widest">AI ENGINE</span>
             </div>
             <p className="font-data-mono text-sm text-on-surface font-bold">Groq Llama 3</p>
-            <p className="text-[10px] text-on-surface-variant mt-1">RAG + Classification</p>
+            <p className="text-[10px] text-gray-500 mt-1">RAG + Classification</p>
           </div>
 
           {/* Voice TTS */}
           <div className="bg-surface-container-lowest rounded-lg border border-outline-variant/30 p-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-primary" />
-              <span className="font-label-caps text-[10px] text-on-surface-variant">VOICE TTS</span>
+              <span className="font-label-caps text-[10px] text-gray-500 font-bold tracking-widest">VOICE TTS</span>
             </div>
             <p className="font-data-mono text-sm text-on-surface font-bold">ElevenLabs</p>
-            <p className="text-[10px] text-on-surface-variant mt-1">eleven_multilingual_v2</p>
+            <p className="text-[10px] text-gray-500 mt-1">eleven_multilingual_v2</p>
           </div>
         </div>
 
         <div className="mt-4 pt-4 border-t border-outline-variant/30 flex items-center justify-between">
-          <div className="text-xs text-on-surface-variant font-data-mono">
-            BFAI v1.0 · Documents speak. BFAI translates.
+          <div className="text-xs text-gray-600 font-data-mono">
+            DocVault AI v1.0 · Documents speak. DocVault AI translates.
           </div>
           <button
             onClick={() => navigate("/chat")}
-            className="flex items-center gap-1 text-xs text-primary hover:underline font-label-caps"
+            className="flex items-center gap-1 text-xs text-primary hover:underline font-label-caps font-semibold"
           >
             <span className="material-symbols-outlined text-sm">chat</span>
-            Open Ask BFAI
+            Open Ask DocVault AI
           </button>
         </div>
       </Section>

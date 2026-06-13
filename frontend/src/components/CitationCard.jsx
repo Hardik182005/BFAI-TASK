@@ -9,11 +9,11 @@ export default function CitationCard({ citation }) {
     <>
       {/* Thumbnail card */}
       <div
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-fixed border border-outline-variant/30 cursor-pointer hover:bg-primary-fixed/80 transition-all group"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-50 border border-purple-200 cursor-pointer hover:bg-purple-100 transition-all group"
         onClick={() => setModalOpen(true)}
       >
         {/* Page thumbnail */}
-        <div className="w-10 h-12 rounded overflow-hidden border border-outline-variant/40 shrink-0 bg-surface-container">
+        <div className="w-10 h-12 rounded overflow-hidden border border-purple-200 shrink-0 bg-gray-100">
           <img
             src={imageUrl}
             alt={`${citation.doc_name} p.${citation.page_number}`}
@@ -23,9 +23,9 @@ export default function CitationCard({ citation }) {
         </div>
         {/* Citation text */}
         <div>
-          <p className="text-[11px] font-semibold text-on-primary-container leading-tight">{citation.doc_name}</p>
-          <p className="text-[11px] text-on-primary-container/70">Page {citation.page_number}</p>
-          <span className="material-symbols-outlined text-[14px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span>
+          <p className="text-[11px] font-semibold text-purple-900 leading-tight">{citation.doc_name}</p>
+          <p className="text-[11px] text-purple-700">Page {citation.page_number}</p>
+          <span className="material-symbols-outlined text-[14px] text-purple-600 opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span>
         </div>
       </div>
 
