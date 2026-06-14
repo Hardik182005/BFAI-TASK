@@ -40,7 +40,7 @@ steps:
       - --min-instances=0
       - --max-instances=3
       - --timeout=300
-      - --set-secrets=GROQ_API_KEY=BFAI_GROQ_API_KEY:latest,OPENAI_API_KEY=BFAI_OPENAI_API_KEY:latest,ELEVENLABS_API_KEY=BFAI_ELEVENLABS_API_KEY:latest
+      - --set-secrets=GROQ_API_KEY=BFAI_GROQ_API_KEY:latest,GEMINI_API_KEY=BFAI_GEMINI_API_KEY:latest,OPENAI_API_KEY=BFAI_OPENAI_API_KEY:latest,ELEVENLABS_API_KEY=BFAI_ELEVENLABS_API_KEY:latest
       - --set-env-vars=APP_ENV=production
 
 images:
