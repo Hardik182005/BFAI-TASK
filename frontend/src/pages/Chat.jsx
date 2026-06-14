@@ -32,9 +32,12 @@ export default function Chat() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [docs, setDocs] = useState([]);
+  const [showDocPicker, setShowDocPicker] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const audioRef = useRef(null);
+  const inputRef = useRef(null);
+  const docPickerRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,6 +47,32 @@ export default function Chat() {
   useEffect(() => {
     api.getDocuments().then(d => { if (Array.isArray(d)) setDocs(d); }).catch(() => {});
   }, []);
+
+  // Close the document picker when clicking outside it
+  useEffect(() => {
+    if (!showDocPicker) return;
+    const onClick = (e) => {
+      if (docPickerRef.current && !docPickerRef.current.contains(e.target)) {
+        setShowDocPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [showDocPicker]);
+
+  // Insert a document name into the chat input so the user doesn't have to
+  // type/copy the filename manually. Appends a quoted reference at the end.
+  const insertDocName = (filename) => {
+    if (!filename) return;
+    setInput(prev => {
+      const base = prev.trimEnd();
+      const ref = `"${filename}"`;
+      if (!base) return `In ${ref}, `;
+      return base.includes(ref) ? prev : `${base} ${ref} `;
+    });
+    setShowDocPicker(false);
+    inputRef.current?.focus();
+  };
 
   const sendMessage = async (text) => {
     if (!text.trim() || loading) return;
@@ -161,7 +190,13 @@ export default function Chat() {
               {docs.length === 0 ? (
                 <p className="text-[12px] text-on-surface-variant text-center py-4">No documents yet.<br />Upload some files first.</p>
               ) : docs.map(doc => (
-                <div key={doc.doc_id} className="flex items-start gap-2 px-2 py-2 rounded-lg hover:bg-surface-container-low transition-colors">
+                <button
+                  key={doc.doc_id}
+                  type="button"
+                  onClick={() => insertDocName(doc.filename)}
+                  title={`Click to ask about "${doc.filename}"`}
+                  className="w-full text-left flex items-start gap-2 px-2 py-2 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer"
+                >
                   <span className="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">description</span>
                   <div className="min-w-0">
                     <p className="text-[11px] font-semibold text-on-surface truncate" title={doc.filename}>{doc.filename}</p>
@@ -174,7 +209,7 @@ export default function Chat() {
                       </span>
                     )}
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -251,7 +286,36 @@ export default function Chat() {
                 <p className="text-[11px] text-primary mb-1.5 px-1 italic">"{liveTranscript}"</p>
               )}
               <div className="flex gap-2 items-center">
+                {/* Document picker — select a doc to insert its name instead of typing it */}
+                <div className="relative" ref={docPickerRef}>
+                  <button
+                    type="button"
+                    onClick={() => setShowDocPicker(v => !v)}
+                    disabled={docs.length === 0}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${showDocPicker ? "bg-primary text-white" : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"} disabled:opacity-40`}
+                    title={docs.length === 0 ? "No documents to select" : "Select a document to ask about"}
+                  >
+                    <span className="material-symbols-outlined text-lg">attach_file</span>
+                  </button>
+                  {showDocPicker && docs.length > 0 && (
+                    <div className="absolute bottom-full left-0 mb-2 w-72 max-h-72 overflow-y-auto glass-card rounded-xl card-inner-stroke shadow-lg z-20 p-1">
+                      <p className="font-label-caps text-label-caps text-on-surface-variant px-3 py-2">SELECT A DOCUMENT</p>
+                      {docs.map(doc => (
+                        <button
+                          key={doc.doc_id}
+                          type="button"
+                          onClick={() => insertDocName(doc.filename)}
+                          className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-surface-container-low transition-colors"
+                        >
+                          <span className="material-symbols-outlined text-primary text-[16px] shrink-0">description</span>
+                          <span className="text-[12px] text-on-surface truncate" title={doc.filename}>{doc.filename}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <input
+                  ref={inputRef}
                   type="text"
                   value={input}
                   onChange={e => setInput(e.target.value)}
