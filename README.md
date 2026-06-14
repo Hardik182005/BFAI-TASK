@@ -7,7 +7,7 @@
 [![Groq](https://img.shields.io/badge/LLM-Groq%20Llama%203.3-orange)](https://groq.com/)
 [![ElevenLabs](https://img.shields.io/badge/Voice-ElevenLabs-purple)](https://elevenlabs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Deployed](https://img.shields.io/badge/Live-Firebase%20Hosting-red?logo=firebase)](https://bfai-hardik.web.app)
+[![Deployed](https://img.shields.io/badge/Live-Firebase%20Hosting-red?logo=firebase)](https://docvault-ai-app.web.app)
 
 > **Documents speak. BFAI translates.**
 
@@ -17,7 +17,7 @@ A Document Intelligence + Agentic RAG platform. Upload messy real-world document
 
 | Service | URL |
 |---------|-----|
-| Frontend (Firebase) | https://bfai-hardik.web.app |
+| Frontend (Firebase) | https://docvault-ai-app.web.app |
 | Backend API (Cloud Run) | https://bfai-hardik-backend-[hash]-el.a.run.app |
 | API Health | `/api/health` |
 | API Docs | `/docs` |
