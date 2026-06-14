@@ -18,9 +18,9 @@ A Document Intelligence + Agentic RAG platform. Upload messy real-world document
 | Service | URL |
 |---------|-----|
 | Frontend (Firebase) | https://docvault-ai-app.web.app |
-| Backend API (Cloud Run) | https://bfai-hardik-backend-[hash]-el.a.run.app |
-| API Health | `/api/health` |
-| API Docs | `/docs` |
+| Backend API (Cloud Run) | https://bfai-hardik-backend-3692981377.asia-south1.run.app |
+| API Health | https://bfai-hardik-backend-3692981377.asia-south1.run.app/api/health |
+| API Docs | https://bfai-hardik-backend-3692981377.asia-south1.run.app/docs |
 
 ## Features
 
