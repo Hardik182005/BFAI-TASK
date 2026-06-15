@@ -114,12 +114,10 @@ export default function Landing() {
       {/* Navbar */}
       <nav className="fixed top-[40px] left-0 w-full z-40 bg-white/70 backdrop-blur-xl border-b border-[#cac3d9]/30 shadow-sm">
         <div className="flex justify-between items-center w-full px-8 h-[72px] max-w-[1440px] mx-auto">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#6434ed] flex items-center justify-center">
-              <span className="material-symbols-outlined text-white text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
-            </div>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5">
+            <img src="/docvault-icon.svg" alt="DocVault AI" className="w-8 h-8 rounded-lg" />
             <span className="text-xl font-bold text-[#0d0d0d] tracking-tight font-title-md">DocVault AI</span>
-          </div>
+          </button>
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => window.scrollTo({top:0,behavior:"smooth"})} className="text-[#5317dd] font-bold border-b-2 border-[#5317dd] pb-1 font-label-caps text-[11px] tracking-widest">Home</button>
             <button onClick={() => document.getElementById("features")?.scrollIntoView({behavior:"smooth"})} className="text-[#484456] hover:text-[#5317dd] transition-colors font-label-caps text-[11px] tracking-widest">Features</button>
@@ -341,39 +339,37 @@ export default function Landing() {
                 const lit = active || done || stage.highlight;
                 return (
                 <React.Fragment key={stage.title}>
-                  <div className={`flex flex-col items-center text-center flex-1 min-w-[150px] transition-all duration-500 ${active ? "scale-[1.06]" : "scale-100"}`}>
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all duration-500 ${
-                      active
-                        ? "bg-[#5317dd] text-white shadow-lg shadow-[#5317dd]/40 ring-4 ring-[#5317dd]/20"
-                        : lit
-                          ? "bg-[#5317dd] text-white shadow-md shadow-[#5317dd]/20"
-                          : "bg-[#f0ebff] text-[#5317dd]"
-                    }`}>
-                      <span className={`material-symbols-outlined text-[26px] ${active ? "animate-pulse" : ""}`} style={{ fontVariationSettings: "'FILL' 1" }}>{stage.icon}</span>
+                  <div className={`flex flex-col items-center text-center flex-1 min-w-[150px] transition-transform duration-500 ${active ? "-translate-y-1" : ""}`}>
+                    <div
+                      key={active ? `a-${i}-${hoodStage}` : `s-${i}`}
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-colors duration-500 ${
+                        lit ? "bg-[#5317dd] text-white" : "bg-[#f0ebff] text-[#5317dd]"
+                      } ${active ? "hood-active" : ""}`}
+                    >
+                      <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>{stage.icon}</span>
                     </div>
                     <p className="font-semibold text-[14px] text-[#0d0d0d]">{stage.title}</p>
                     <p className="text-[11px] text-[#797487] mt-1 mb-2">{stage.desc}</p>
                     {stage.card ? (
-                      <div className={`rounded-lg px-3 py-2 font-data-mono text-[10px] space-y-0.5 transition-all duration-500 ${active ? "bg-[#5317dd]/10 border border-[#5317dd]/40 text-[#5317dd] shadow-sm" : "bg-[#5317dd]/5 border border-[#5317dd]/20 text-[#5317dd]"}`}>
+                      <div className={`rounded-lg px-3 py-2 font-data-mono text-[10px] space-y-0.5 transition-all duration-500 ${active ? "bg-[#5317dd]/10 border border-[#5317dd]/50 text-[#5317dd] shadow-md scale-105" : "bg-[#5317dd]/5 border border-[#5317dd]/20 text-[#5317dd]"}`}>
                         {stage.card.map(line => <div key={line}>{line}</div>)}
                       </div>
                     ) : (
                       <div className="flex flex-wrap gap-1 justify-center">
                         {stage.chips.map(c => (
-                          <span key={c} className={`text-[9px] font-semibold px-2 py-0.5 rounded-full transition-all duration-500 ${active ? "bg-[#5317dd] text-white" : "bg-[#f0ebff] text-[#5317dd]"}`}>{c}</span>
+                          <span key={c} className={`text-[9px] font-semibold px-2 py-0.5 rounded-full transition-all duration-500 ${active ? "bg-[#5317dd] text-white scale-110" : "bg-[#f0ebff] text-[#5317dd]"}`}>{c}</span>
                         ))}
                       </div>
                     )}
                   </div>
                   {i < arr.length - 1 && (
-                    <div className="hidden md:flex items-center justify-center shrink-0 pt-7 gap-1">
-                      {[0, 1, 2].map(d => (
-                        <span
-                          key={d}
-                          className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${hoodStage === i ? "bg-[#5317dd]" : "bg-[#cac3d9]"}`}
-                          style={hoodStage === i ? { animation: `pulse 0.9s ${d * 0.15}s infinite` } : undefined}
-                        />
-                      ))}
+                    <div className="hidden md:flex items-center justify-start shrink-0 pt-7 w-12 relative overflow-hidden">
+                      {/* dashed track */}
+                      <div className="absolute top-[34px] left-0 right-0 h-[2px] bg-[#e0d8f5]" />
+                      {/* traveling packet — only on the segment currently flowing */}
+                      {hoodStage === i && (
+                        <span className="hood-packet absolute top-[30px] left-0 w-2.5 h-2.5 rounded-full bg-[#5317dd] shadow-[0_0_8px_2px_rgba(83,23,221,0.5)]" />
+                      )}
                     </div>
                   )}
                 </React.Fragment>

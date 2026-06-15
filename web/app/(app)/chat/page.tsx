@@ -244,7 +244,7 @@ export default function Chat() {
         {/* Right: Chat interface */}
         <div className="flex-1 flex flex-col gap-gutter min-w-0">
           {/* Messages */}
-          <div className="glass-card rounded-xl card-inner-stroke flex flex-col flex-1" style={{ minHeight: 0, maxHeight: "65vh" }}>
+          <div className="glass-card rounded-xl card-inner-stroke flex flex-col flex-1" style={{ minHeight: "360px" }}>
             <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse shrink-0"></span>
@@ -385,24 +385,28 @@ export default function Chat() {
             </div>
           </div>
 
-          {/* Suggested Questions */}
-          <div className="glass-card rounded-xl p-6 card-inner-stroke">
-            <h3 className="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary">tips_and_updates</span>
-              Suggested Questions
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {SUGGESTED_QUESTIONS.map((q, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => sendMessage(q)}
-                  className="w-full text-left px-3 py-2.5 text-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors border border-outline-variant/30 hover:border-primary/30"
-                >
-                  {q}
-                </button>
-              ))}
+          {/* Suggested Questions — shown only before the conversation starts so
+              the chat area stays roomy and everything is clearly visible once
+              the user is actively chatting. */}
+          {messages.length <= 1 && (
+            <div className="glass-card rounded-xl p-6 card-inner-stroke">
+              <h3 className="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-secondary">tips_and_updates</span>
+                Suggested Questions
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {SUGGESTED_QUESTIONS.map((q, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => sendMessage(q)}
+                    className="w-full text-left px-3 py-2.5 text-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors border border-outline-variant/30 hover:border-primary/30"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import TranslateWidget from "./TranslateWidget";
 
@@ -40,12 +41,19 @@ export default function TopNavBar({ onToggleMobileMenu }: { onToggleMobileMenu: 
         <span className="material-symbols-outlined">menu</span>
       </button>
 
-      {/* Breadcrumb */}
+      {/* Breadcrumb — the "DocVault AI" root links to the landing page */}
       <div className="hidden md:flex items-center gap-1.5 text-[13px] text-gray-400 shrink-0">
         {crumbs.map((c, i) => (
           <React.Fragment key={i}>
             {i > 0 && <span className="text-gray-300">›</span>}
-            <span className={i === crumbs.length - 1 ? "text-gray-700 font-semibold" : "text-gray-400"}>{c}</span>
+            {i === 0 ? (
+              <Link href="/" className="flex items-center gap-1.5 text-gray-700 font-semibold hover:text-[#6434ed] transition-colors">
+                <img src="/docvault-icon.svg" alt="" className="w-5 h-5 rounded" />
+                {c}
+              </Link>
+            ) : (
+              <span className={i === crumbs.length - 1 ? "text-gray-700 font-semibold" : "text-gray-400"}>{c}</span>
+            )}
           </React.Fragment>
         ))}
       </div>

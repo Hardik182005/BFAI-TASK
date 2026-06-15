@@ -33,16 +33,14 @@ export default function SideNavBar() {
       className="hidden md:flex fixed left-0 top-0 h-screen w-[240px] bg-white flex-col z-40"
       style={{ borderRight: "1px solid #e5e7eb" }}
     >
-      {/* Logo */}
-      <div className="flex items-center gap-2.5 px-5 py-[18px]" style={{ borderBottom: "1px solid #e5e7eb" }}>
-        <div className="w-8 h-8 rounded-lg bg-[#6434ed] flex items-center justify-center shrink-0">
-          <span className="material-symbols-outlined text-white text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
-        </div>
+      {/* Logo — click to go to the landing page */}
+      <Link href="/" className="flex items-center gap-2.5 px-5 py-[18px] hover:bg-gray-50 transition-colors" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <img src="/docvault-icon.svg" alt="DocVault AI" className="w-8 h-8 rounded-lg shrink-0" />
         <div>
           <p className="text-[14px] font-bold text-gray-900 leading-tight">DocVault AI</p>
           <p className="text-[11px] text-gray-400 leading-none">Document Intelligence</p>
         </div>
-      </div>
+      </Link>
 
       {/* Document stats pill */}
       <div className="px-4 pt-3 pb-1">

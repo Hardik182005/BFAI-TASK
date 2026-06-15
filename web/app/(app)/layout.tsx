@@ -37,12 +37,10 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
     <div className="fixed inset-0 z-50 bg-black/30 md:hidden" onClick={onClose}>
       <div className="bg-white w-[240px] h-full flex flex-col border-r border-gray-100 shadow-xl" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <span className="material-symbols-outlined text-white text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2" onClick={onClose}>
+            <img src="/docvault-icon.svg" alt="DocVault AI" className="w-7 h-7 rounded-lg" />
             <span className="font-bold text-[14px] text-gray-900">DocVault AI</span>
-          </div>
+          </Link>
           <button onClick={onClose}><span className="material-symbols-outlined text-gray-400">close</span></button>
         </div>
         <ul className="flex flex-col gap-0.5 p-3 flex-grow">
