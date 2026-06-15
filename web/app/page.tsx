@@ -36,6 +36,15 @@ export default function Landing() {
   const pipelineRef = useRef(null);
   const timers = useRef([]);
 
+  // "How it works under the hood" — continuously animate a data packet flowing
+  // through the 5 stages. hoodStage walks 0→4 and loops, lighting each stage and
+  // its incoming connector in sequence.
+  const [hoodStage, setHoodStage] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setHoodStage(s => (s + 1) % 5), 1100);
+    return () => clearInterval(id);
+  }, []);
+
   useEffect(() => {
     const id = setInterval(() => setCurrentDocIndex(p => (p + 1) % HERO_DOCS.length), 5000);
     return () => clearInterval(id);
@@ -326,33 +335,49 @@ export default function Landing() {
                 { icon: "data_object", title: "Structured Data", desc: "Text + Tables (JSON)", chips: [], card: ["12 pages", "3 tables", "JSON ✓"] },
                 { icon: "auto_awesome", title: "OpenAI + RAG", desc: "Classify · Retrieve · Answer", chips: ["Grounded"], card: null },
                 { icon: "verified", title: "Cited Answer", desc: "Grounded · No hallucination", chips: ["[doc, p.N]"], card: null },
-              ].map((stage, i, arr) => (
+              ].map((stage, i, arr) => {
+                const active = hoodStage === i;       // current stage being processed
+                const done = hoodStage > i;           // already passed this cycle
+                const lit = active || done || stage.highlight;
+                return (
                 <React.Fragment key={stage.title}>
-                  <div className="flex flex-col items-center text-center flex-1 min-w-[150px]">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 ${stage.highlight ? "bg-[#5317dd] text-white shadow-lg shadow-[#5317dd]/30" : "bg-[#f0ebff] text-[#5317dd]"}`}>
-                      <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>{stage.icon}</span>
+                  <div className={`flex flex-col items-center text-center flex-1 min-w-[150px] transition-all duration-500 ${active ? "scale-[1.06]" : "scale-100"}`}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all duration-500 ${
+                      active
+                        ? "bg-[#5317dd] text-white shadow-lg shadow-[#5317dd]/40 ring-4 ring-[#5317dd]/20"
+                        : lit
+                          ? "bg-[#5317dd] text-white shadow-md shadow-[#5317dd]/20"
+                          : "bg-[#f0ebff] text-[#5317dd]"
+                    }`}>
+                      <span className={`material-symbols-outlined text-[26px] ${active ? "animate-pulse" : ""}`} style={{ fontVariationSettings: "'FILL' 1" }}>{stage.icon}</span>
                     </div>
                     <p className="font-semibold text-[14px] text-[#0d0d0d]">{stage.title}</p>
                     <p className="text-[11px] text-[#797487] mt-1 mb-2">{stage.desc}</p>
                     {stage.card ? (
-                      <div className="bg-[#5317dd]/5 border border-[#5317dd]/20 rounded-lg px-3 py-2 font-data-mono text-[10px] text-[#5317dd] space-y-0.5">
+                      <div className={`rounded-lg px-3 py-2 font-data-mono text-[10px] space-y-0.5 transition-all duration-500 ${active ? "bg-[#5317dd]/10 border border-[#5317dd]/40 text-[#5317dd] shadow-sm" : "bg-[#5317dd]/5 border border-[#5317dd]/20 text-[#5317dd]"}`}>
                         {stage.card.map(line => <div key={line}>{line}</div>)}
                       </div>
                     ) : (
                       <div className="flex flex-wrap gap-1 justify-center">
                         {stage.chips.map(c => (
-                          <span key={c} className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#f0ebff] text-[#5317dd]">{c}</span>
+                          <span key={c} className={`text-[9px] font-semibold px-2 py-0.5 rounded-full transition-all duration-500 ${active ? "bg-[#5317dd] text-white" : "bg-[#f0ebff] text-[#5317dd]"}`}>{c}</span>
                         ))}
                       </div>
                     )}
                   </div>
                   {i < arr.length - 1 && (
-                    <div className="hidden md:flex items-center justify-center shrink-0 pt-7">
-                      <span className="text-[#cac3d9] text-xl">···</span>
+                    <div className="hidden md:flex items-center justify-center shrink-0 pt-7 gap-1">
+                      {[0, 1, 2].map(d => (
+                        <span
+                          key={d}
+                          className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${hoodStage === i ? "bg-[#5317dd]" : "bg-[#cac3d9]"}`}
+                          style={hoodStage === i ? { animation: `pulse 0.9s ${d * 0.15}s infinite` } : undefined}
+                        />
+                      ))}
                     </div>
                   )}
                 </React.Fragment>
-              ))}
+              );})}
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2 mt-8 pt-6 border-t border-[#cac3d9]/30">
               <span className="flex items-center gap-2 text-[12px] text-[#797487]">
